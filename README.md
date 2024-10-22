@@ -18,7 +18,7 @@ Inside of your Astro project, you'll see the following folders and files:
 /
 ├── index.ts
 ├── src
-│   └── MyComponent.astro
+│   └── components/*.astro
 ├── tsconfig.json
 ├── package.json
 ```
