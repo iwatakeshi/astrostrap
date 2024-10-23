@@ -1,0 +1,26 @@
+---
+import type { HTMLAttributes } from "astro/types";
+interface Props extends HTMLAttributes<"img"> {
+  position?: "top" | "bottom";
+}
+
+const {
+  position,
+  class: klass,
+  "class:list": klassList,
+  ...props
+} = Astro.props as Props;
+---
+
+<img
+  class:list={[
+    {
+      "card-img": !position,
+      "card-img-top": position === "top",
+      "card-img-bottom": position === "bottom",
+    },
+    klass,
+    klassList,
+  ]}
+  {...props}
+/>
