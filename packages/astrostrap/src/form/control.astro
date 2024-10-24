@@ -2,6 +2,7 @@
 import type { ComponentProps, HTMLTag, Polymorphic, HTMLAttributes } from "astro/types";
 
 interface CommonProps {
+    size?: 'sm' | 'lg' | string;
     plaintext?: boolean;
     readonly?: boolean;
 }
@@ -15,6 +16,7 @@ const {
     class: klass,
     "class:list": klassList,
     plaintext = false,
+    size = "",
     ...props
 } = Astro.props as Props;
 ---
@@ -24,6 +26,8 @@ const {
         {
             "form-control": !plaintext,
             "form-control-plaintext": plaintext,
+            "form-control-sm": size === "sm",
+            "form-control-lg": size === "lg",
         },
         klass,
         klassList,
