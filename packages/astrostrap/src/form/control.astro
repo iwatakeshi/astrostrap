@@ -1,0 +1,32 @@
+---
+import type { ComponentProps, HTMLTag, Polymorphic, HTMLAttributes } from "astro/types";
+
+interface CommonProps {
+    plaintext?: boolean;
+    readonly?: boolean;
+}
+
+type Props<Tag extends HTMLTag = 'input' | 'textarea'> = Tag extends 'input' ? 
+    Polymorphic<{ as: Tag, type?: HTMLAttributes<'input'>['type'] } & CommonProps> : 
+    Polymorphic<{ as: Tag } & CommonProps>;
+
+const {
+    as: As = "input",
+    class: klass,
+    "class:list": klassList,
+    plaintext = false,
+    ...props
+} = Astro.props as Props;
+---
+
+<As
+    class:list={[
+        {
+            "form-control": !plaintext,
+            "form-control-plaintext": plaintext,
+        },
+        klass,
+        klassList,
+    ]}
+    {...props}><slot /></As
+>

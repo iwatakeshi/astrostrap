@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"form"> & {
+    floating?: boolean;
+};
+const {
+    floating = false,
+    class: klass,
+    "class:list": klassList,
+    ...props
+} = Astro.props as Props;
+---
+
+<form
+    class:list={[{ "form-floating": !!floating }, klass, klassList]}
+    {...props}
+>
+    <slot />
+</form>

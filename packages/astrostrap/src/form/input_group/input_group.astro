@@ -1,0 +1,31 @@
+---
+import Box from "../../box";
+import type { ComponentProps } from "astro/types";
+interface Props extends ComponentProps<typeof Box> {
+    wrap?: boolean;
+    size?: "sm" | "lg" | string;
+}
+const {
+    wrap: isWrap = true,
+    size: size = "",
+    class: klass,
+    "class:list": klassList,
+    ...props
+} = Astro.props as Props;
+---
+
+<Box
+    class:list={[
+        "input-group",
+        {
+            "flex-nowrap": isWrap,
+            "input-group-sm": size === "sm",
+            "input-group-lg": size === "lg",
+        },
+        klass,
+        klassList,
+    ]}
+    {...props}
+>
+    <slot />
+</Box>

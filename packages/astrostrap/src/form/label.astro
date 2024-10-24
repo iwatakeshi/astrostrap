@@ -1,0 +1,15 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"label"> {}
+
+const {
+    class: klass,
+    "class:list": klassList,
+    ...props
+} = Astro.props as Props;
+---
+
+<label class:list={["form-label", klass, klassList]} {...props}>
+    <slot />
+</label>

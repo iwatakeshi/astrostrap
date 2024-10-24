@@ -1,0 +1,27 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"select"> {
+    size?: "sm" | "lg" | string;
+}
+
+const {
+    size: size = "",
+    class: klass,
+    "class:list": klassList,
+    ...props
+} = Astro.props as Props;
+---
+
+<select
+    class:list={[
+        "form-select",
+        {
+            "form-select-sm": size === "sm",
+            "form-select-lg": size === "lg",
+        },
+        klass,
+        klassList,
+    ]}
+    {...props}><slot /></select
+>
